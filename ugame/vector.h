@@ -219,7 +219,7 @@ Vec3f cross3f (Vec3f u, Vec3f v) {
     };
 }
 static inline
-Vec3f crossLeft3f (Vec3f u, Vec3f v) { return cross3f(v, u)); }
+Vec3f crossLeft3f (Vec3f u, Vec3f v) { return cross3f(v, u); }
 
 
 /* Vector Norm.
