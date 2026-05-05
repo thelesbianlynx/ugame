@@ -64,31 +64,40 @@ void __array_move_out (void** data, size_t* size, size_t* capacity, size_t sz, s
 
 
 #define arrayPush(array, item) \
-  ( __array_alloc((void**) &(array).data, &(array).size, &(array).capacity, sizeof *(array).data), \
-    (array).data[(array).size++] = (item) )
+  ( __array_alloc((void**) &(array)->data, &(array)->size, &(array)->capacity, sizeof *(array)->data), \
+    (array)->data[(array)->size++] = (item) )
 
 #define arrayPop(array) \
-  ( assert((array).size > 0), \
-    (array).data[--(array).size] )
+  ( assert((array)->size > 0), \
+    (array)->data[--(array)->size] )
 
 #define arrayPeek(array) \
-  ( assert((array).size > 0), \
-    (array).data[(array).size - 1] )
+  ( assert((array)->size > 0), \
+    (array)->data[(array)->size - 1] )
 
 
 #define arrayInsert(array, index, item) \
-  ( __array_move_in((void**) &(array).data, &(array).size, &(array).capacity, sizeof *(array).data, (index)), \
-    (array).data[index] = (item) )
+  ( __array_move_in((void**) &(array)->data, &(array)->size, &(array)->capacity, sizeof *(array)->data, (index)), \
+    (array)->data[index] = (item) )
 
 #define arrayRemove(array, index) \
-  ( __array_move_out((void**) &(array).data, &(array).size, &(array).capacity, sizeof *(array).data, (index)), \
-    (array).data[(array).size] )
+  ( __array_move_out((void**) &(array)->data, &(array)->size, &(array)->capacity, sizeof *(array)->data, (index)), \
+    (array)->data[(array)->size] )
 
 
 #define arrayClear(array) \
-  ( (array).size = 0 )
+  ( (array)->size = 0 )
 
 #define arrayClean(array) \
-  ( free((array).data), \
-    (array).data = NULL, \
-    (array).size = 0 )
+  ( free((array)->data), \
+    (array)->data = NULL, \
+    (array)->size = 0 )
+
+
+#define array_push arrayPush
+#define array_pop arrayPop
+#define array_peek arrayPeek
+#define array_insert arrayInsert
+#define array_remove arrayRemove
+#define array_clear arrayClear
+#define array_clean arrayClean
