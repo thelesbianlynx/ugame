@@ -5,7 +5,7 @@ INCLUDEDIR ?= $(DESTDIR)$(PREFIX)/include
 
 # Test program.
 test: test.c $(HEADERS)
-	gcc -o test test.c
+	gcc -o test test.c -fsanitize=address
 
 .PHONY: clean
 clean:
